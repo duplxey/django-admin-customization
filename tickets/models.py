@@ -32,11 +32,17 @@ class Concert(models.Model):
     price = models.DecimalField(max_digits=6, decimal_places=2)
     tickets_left = models.IntegerField(default=0)
 
+    class Meta:
+        ordering = ["starts_at"]
+
     def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
         if self.pk is None:
             self.tickets_left = self.venue.capacity
 
         super().save(force_insert, force_update, using, update_fields)
+
+    def is_sold_out(self):
+        return self.tickets_left == 0
 
     def __str__(self):
         return f"{self.venue}: {self.name}"

@@ -17,6 +17,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+admin.site.site_title = "TicketsPlus site admin"
+admin.site.site_header = "TicketsPlus administration"
+admin.site.index_title = "Site administration"
+admin.site.site_url = "/"
+admin.site.enable_nav_sidebar = True
+admin.site.empty_value_display = "-"
+
 urlpatterns = [
-    path("admin/", admin.site.urls),
+    path("secretadmin/", admin.site.urls),
 ]
