@@ -20,13 +20,13 @@ class Command(BaseCommand):
                 name="Arena of Nîmes", address="Boulevard des Arènes, 30000 Nîmes, France", capacity=720,
             ),
             Venue.objects.get_or_create(
-                name="Red Rocks Amphitheatre", address="18300 W Alameda, Morrison, CO, United States", capacity=640,
+                name="Red Rocks Amphitheatre", address="18300 W Alameda, Morrison, United States", capacity=640,
             ),
             Venue.objects.get_or_create(
                 name="Dalhalla Amphitheatre", address="Dalhalla, 790 90 Rättvik, Sweden", capacity=800,
             ),
             Venue.objects.get_or_create(
-                name="The Fillmore", address="1805 Geary Blvd, San Francisco, CA, United States", capacity=620,
+                name="The Fillmore", address="1805 Geary Blvd, San Francisco, United States", capacity=620,
             ),
         ]
 
@@ -46,7 +46,7 @@ class Command(BaseCommand):
                 description="",
                 venue=venue,
                 starts_at=datetime.now(pytz.utc)
-                + timedelta(days=random.randint(1, 365)),
+                          + timedelta(days=random.randint(1, 365)),
                 price=random.randint(10, 100),
             )
             concert.categories.add(category)
@@ -60,7 +60,9 @@ class Command(BaseCommand):
             Ticket.objects.create(
                 concert=concert,
                 customer_full_name=f"{random.choice(names)} {random.choice(surname)}",
-                payment_method=random.choice(["CC", "CC", "CC", "CC", "DC", "DC", "ET", "BC"]),
+                payment_method=random.choice(
+                    ["CC", "CC", "CC", "CC", "DC", "DC", "ET", "BC"]
+                ),
                 paid_at=datetime.now(pytz.utc) - timedelta(days=random.randint(1, 365)),
                 is_active=random.choice([True, False]),
             )

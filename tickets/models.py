@@ -18,6 +18,7 @@ class ConcertCategory(models.Model):
     class Meta:
         verbose_name = "concert category"
         verbose_name_plural = "concert categories"
+        ordering = ["-name"]
 
     def __str__(self):
         return f"{self.name}"
@@ -35,8 +36,10 @@ class Concert(models.Model):
     class Meta:
         ordering = ["starts_at"]
 
-    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
-        if self.pk is None:
+    def save(
+        self, force_insert=False, force_update=False, using=None, update_fields=None
+    ):
+        if self.id is None:
             self.tickets_left = self.venue.capacity
 
         super().save(force_insert, force_update, using, update_fields)
@@ -57,7 +60,9 @@ class Ticket(models.Model):
         ("ET", "Ethereum"),
         ("BC", "Bitcoin"),
     ]
-    payment_method = models.CharField(max_length=2, default="CC", choices=PAYMENT_METHODS)
+    payment_method = models.CharField(
+        max_length=2, default="CC", choices=PAYMENT_METHODS
+    )
     paid_at = models.DateTimeField(auto_now_add=True)
     is_active = models.BooleanField(default=True)
 

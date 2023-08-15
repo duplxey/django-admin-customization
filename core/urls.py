@@ -20,9 +20,7 @@ from django.urls import path
 admin.site.site_title = "TicketsPlus site admin"
 admin.site.site_header = "TicketsPlus administration"
 admin.site.index_title = "Site administration"
-admin.site.site_url = "/"
-admin.site.enable_nav_sidebar = True
-admin.site.empty_value_display = "-"
+# https://github.com/django/django/blob/main/django/contrib/admin/sites.py
 
 urlpatterns = [
     path("secretadmin/", admin.site.urls),
