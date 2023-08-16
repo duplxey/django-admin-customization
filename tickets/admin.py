@@ -47,6 +47,7 @@ class SoldOutFilter(SimpleListFilter):
 
 class ConcertAdmin(admin.ModelAdmin):
     list_display = ["name", "display_venue", "starts_at", "display_price", "tickets_left", "display_sold_out"]
+    list_select_related = ["venue"]
     search_fields = ["name", "venue__name", "venue__address"]
     list_filter = ["venue", SoldOutFilter]
     readonly_fields = ["tickets_left"]
@@ -82,6 +83,7 @@ def deactivate_tickets(modeladmin, request, queryset):
 
 class TicketAdmin(DjangoQLSearchMixin, ImportExportActionModelAdmin):
     list_display = ["customer_full_name", "concert", "payment_method", "paid_at", "is_active"]
+    list_select_related = ["concert", "concert__venue"]
     actions = [activate_tickets, deactivate_tickets]
     form = TicketAdminForm
 
