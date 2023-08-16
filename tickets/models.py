@@ -36,9 +36,7 @@ class Concert(models.Model):
     class Meta:
         ordering = ["starts_at"]
 
-    def save(
-        self, force_insert=False, force_update=False, using=None, update_fields=None
-    ):
+    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
         if self.id is None:
             self.tickets_left = self.venue.capacity
 
