@@ -17,7 +17,7 @@ class TicketAdminForm(ModelForm):
 
     def __init__(self, *args, **kwargs):
         instance = kwargs.get("instance")
-        initial = {}
+        initial = kwargs.pop('initial', {})  # pop to avoid mulitple values in super call
 
         if instance:
             customer_full_name_split = instance.customer_full_name.split(
